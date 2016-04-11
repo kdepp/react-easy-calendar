@@ -95,7 +95,8 @@ export const normalize_month = (d) => {
 	return d;
 };
 
-export const normalize = compose(normalize_month, normalize_day);
+// Note: need to execute twice in circle, in case the change of month influences the upper bound of days
+export const normalize = compose(normalize_month, normalize_day, normalize_month, normalize_day);
 
 export const offset_date = (d, day_offset) => normalize(make_date(get_year(d), get_month(d), get_day(d) + day_offset));
 
@@ -103,7 +104,7 @@ export const padding_month_dates = (d) => {
 	let first = make_date(get_year(d), get_month(d), 1),
 		last  = make_date(get_year(d), get_month(d), days_of_month(d));
 
-	return flatten(
+	return flatten([
 		range(0, get_weekday(first)).reverse()
 			.map(i => offset_date(first, -(i + 1))),
 
@@ -112,5 +113,5 @@ export const padding_month_dates = (d) => {
 
 		range(0, 6 - get_weekday(last))
 			.map(i => offset_date(last, i + 1))
-	);
+	]);
 };
