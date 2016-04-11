@@ -2,15 +2,15 @@ import * as x from './utils';
 
 const {partial, compose, range, flatten} = x;
 
-const make_date         = (year, month, day) => ({day, month, year});
-const get_day           = (d) => d.day;
-const get_month         = (d) => d.month;
-const get_year          = (d) => d.year;
-const get_weekday       = (d) => system_date(d).getDay();
-const system_date       = (d) => new Date(get_year(d), get_month(d) - 1, get_day(d));
-const from_system_date  = (d) => make_date(d.getFullYear(), d.getMonth() + 1, d.getDate());
+export const make_date         = (year, month, day) => ({day, month, year});
+export const get_day           = (d) => d.day;
+export const get_month         = (d) => d.month;
+export const get_year          = (d) => d.year;
+export const get_weekday       = (d) => system_date(d).getDay();
+export const system_date       = (d) => new Date(get_year(d), get_month(d) - 1, get_day(d));
+export const from_system_date  = (d) => make_date(d.getFullYear(), d.getMonth() + 1, d.getDate());
 
-const compare_date = partial((level, a, b) => {
+export const compare = partial((level, a, b) => {
     if (!a || !b)
         return null;
 
@@ -23,24 +23,24 @@ const compare_date = partial((level, a, b) => {
     }, 0);
 });
 
-const compare_date      = compare('day');
-const compare_month     = compare('month');
-const compare_year      = compare('year');
-const date_equal        = (a, b) => !compare_date(a, b);
+export const compare_date      = compare('day');
+export const compare_month     = compare('month');
+export const compare_year      = compare('year');
+export const date_equal        = (a, b) => !compare_date(a, b);
 
-const date_in_range = (d, r) => {
+export const date_in_range = (d, r) => {
    let [start, end] = (r || []);
 
    return (start ? compare_date(start, d) <= 0 : true)
        && (end   ? compare_date(end,   d) >= 0 : true);
 };
 
-const is_leap_year = compose(
+export const is_leap_year = compose(
 	year => year % 4 == 0 && (year % 100 != 0 || year % 400 == 0),
 	get_year
 );
 
-const days_of_month = (d) => {
+export const days_of_month = (d) => {
 	let m = get_month(d);
 
 	if (!!~[4, 6, 9, 11].indexOf(m))
@@ -51,9 +51,9 @@ const days_of_month = (d) => {
 		return 31;
 };
 
-const days_of_last_month = (d) => days_of_month(normalize_month(make_date(get_year(d), get_month(d) - 1, 1)));
+export const days_of_last_month = (d) => days_of_month(normalize_month(make_date(get_year(d), get_month(d) - 1, 1)));
 
-const normalize_day = (d) => {
+export const normalize_day = (d) => {
 	let day = get_day(d);
 
 	if (day > days_of_month(d)) {
@@ -74,7 +74,7 @@ const normalize_day = (d) => {
 	return d;
 };
 
-const normalize_month = (d) => {
+export const normalize_month = (d) => {
 	let month = get_month(d);
 
 	if (month > 12) {
@@ -95,11 +95,11 @@ const normalize_month = (d) => {
 	return d;
 };
 
-const normalize = compose(normalize_month, normalize_day);
+export const normalize = compose(normalize_month, normalize_day);
 
-const offset_date = (d, day_offset) => normalize(make_date(get_year(d), get_month(d), get_day(d) + day_offset));
+export const offset_date = (d, day_offset) => normalize(make_date(get_year(d), get_month(d), get_day(d) + day_offset));
 
-const padding_month_dates = (d) => {
+export const padding_month_dates = (d) => {
 	let first = make_date(get_year(d), get_month(d), 1),
 		last  = make_date(get_year(d), get_month(d), days_of_month(d));
 

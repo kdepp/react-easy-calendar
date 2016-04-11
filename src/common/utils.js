@@ -92,3 +92,12 @@ export const flatten = (list) => {
         return prev.concat(cur);
     }, [], list);
 };
+
+
+/*
+ * Function Operations
+ */
+
+export const compose = (...fns) => {
+    return reduce_right((cur, prev) => x => cur(prev(x)), id, fns);
+};
