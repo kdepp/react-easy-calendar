@@ -49,7 +49,7 @@ const RawCalendar = React.createClass({
     componentWillReceiveProps: function (nextProps) {
         let self = this,
             props_to_state = {
-                selected_dates: (a, b) => x.and.apply(null, x.zip((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
+                selected_dates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
                 hovered_date: (a, b) => c.compare_date(a, b) === 0
             };
 
