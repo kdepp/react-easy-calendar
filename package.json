@@ -1,6 +1,6 @@
 {
-  "name": "kd-calendar",
-  "description": "kdepp's react calendar",
+  "name": "react-easy-calendar",
+  "description": "react calendar - easy to use",
   "version": "0.1.0",
   "author": "kdepp <kdepp.cd@gmail.com>",
   "scripts": {
