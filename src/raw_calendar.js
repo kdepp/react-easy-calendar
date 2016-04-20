@@ -161,14 +161,14 @@ const RawCalendar = React.createClass({
 						<ul style={styles.week}>
 						{weekday_title.map(t => {
 							return (
-								<li style={get_style(styles, ['day', 'weekday_title'])}>{t}</li>
+								<li key={t} style={get_style(styles, ['day', 'weekday_title'])}>{t}</li>
 						    );
 						})}
 						</ul>
 					</li>
 					{weeks.map(week => {
 					return (
-						<li>
+						<li key={JSON.stringify(week)}>
 							<ul style={styles.week}>
 							{week.map(d => {
 								let classes = [
@@ -183,6 +183,7 @@ const RawCalendar = React.createClass({
 
 								return (
 									<li
+                                        key={JSON.stringify(d)}
                                         style={get_style(styles, classes)}
                                         onClick={on_click_date(d)}
                                         onMouseEnter={on_hover_date(d)}
