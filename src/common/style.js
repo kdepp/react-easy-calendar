@@ -1,4 +1,4 @@
-const CALENDAR_WIDTH = 380;
+const CALENDAR_WIDTH = 300;
 
 export const get_style = (styles, classes) => {
 	return classes.reduce((prev, x) => Object.assign({}, prev, styles[x]), {});
