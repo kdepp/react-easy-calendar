@@ -4,13 +4,13 @@ var webpack = require('webpack'),
 module.exports = {
     entry: {
         bundle: [
-            './index.js'
+            './src/index.js'
         ]
     },
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'kd_calendar.js',
-        library: 'kdcalendar',
+        path: path.join(__dirname, 'lib'),
+        filename: 'calendar.js',
+        library: 'react-easy-calendar',
         libraryTarget: 'umd'
     },
     module: {
