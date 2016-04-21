@@ -69,7 +69,7 @@ const DoubleRangeCalendar = React.createClass({
             };
 
         let common_config = {
-                mode: CALENDAR_MODE.MULTIPLE,
+                calendar_mode: CALENDAR_MODE.MULTIPLE,
                 show_out_range: false,
                 selected_reducer,
                 selected_range,
