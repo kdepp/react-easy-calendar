@@ -1,13 +1,21 @@
 {
   "name": "react-easy-calendar",
-  "description": "react calendar - easy to use",
   "version": "0.1.0",
+  "description": "react calendar - easy to use",
+  "keywords": [
+    "react",
+    "calendar"
+  ],
   "author": "kdepp <kdepp.cd@gmail.com>",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --config webpack.dev.config.js --port 8384 --content-base example/",
     "build": "webpack --verbose --colors --display-error-details --config webpack.prod.config.js",
     "test": "mocha --compilers js:babel-core/register",
-    "watch_test": "mocha -w --compilers js:babel-core/register"
+    "test:watch": "mocha -w --compilers js:babel-core/register"
+  },
+  "dependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
@@ -22,8 +30,5 @@
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   },
-  "dependencies": {
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1"
-  }
+  "license": "MIT"
 }
