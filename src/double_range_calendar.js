@@ -45,7 +45,6 @@ const DoubleRangeCalendar = React.createClass({
         let self = this,
             {
                 on_update,
-                on_ok,
                 valid_range,
                 default_date,
                 styles
@@ -63,9 +62,6 @@ const DoubleRangeCalendar = React.createClass({
                 self.setState({ ...state, selected_range }, () => {
                     (self.props.on_update_state || x.noop)(self.state);
                 });
-            },
-            on_click_ok      = () => {
-                (on_ok || noop)(self.state);
             };
 
         let common_config = {

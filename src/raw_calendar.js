@@ -23,9 +23,6 @@ const RawCalendar = React.createClass({
         // a tuple of selected dates
         selected_range: PropTypes.array,
 
-        // callback for clicking on ok button
-        on_ok: PropTypes.func.isRequired,
-
         // callback for state changes after mouse hover & mouse leave & click on dates
         on_update_state: PropTypes.func.isRequired,
 
@@ -74,7 +71,6 @@ const RawCalendar = React.createClass({
                 on_update_state,
                 selected_reducer,
                 show_out_range,
-                on_ok,
                 styles,
                 style
             } = self.props,
@@ -147,9 +143,6 @@ const RawCalendar = React.createClass({
                 if (c.compare_date(date, self.state.hovered_date) === 0) {
                     self.setState({hovered_date: {}}, notify_state_change);
                 }
-            },
-            on_click_ok = () => {
-                (on_ok || noop)(self.state.selected_dates);
             };
 
         styles = Object.assign({}, calendar_styles, styles || {});
