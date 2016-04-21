@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 
-import * as c from '../src/common/calendar_utils';
-import RawCalendar from '../src/raw_calendar';
-import SimpleCalendar from '../src/simple_calendar';
-import SingleRangeCalendar from '../src/single_range_calendar';
-import DoubleRangeCalendar from '../src/double_range_calendar';
+import {RawCalendar, SimpleCalendar, SingleRangeCalendar, DoubleRangeCalendar, utils as c} from '../src/index';
 
 let raw_calendar_config = {
     calendar_mode: 0,
