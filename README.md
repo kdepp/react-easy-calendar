@@ -10,7 +10,7 @@ npm install --save react-easy-calendar
 
 ### Online Demo
 
-[http://localhost:8384](http://localhost:8384)
+[http://kdepp.github.io/react-easy-calendar/demo.html](http://kdepp.github.io/react-easy-calendar/demo.html)
 
 
 ### Screenshots
