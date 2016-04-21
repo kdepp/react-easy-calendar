@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --config webpack.dev.config.js --port 8384 --content-base example/",
     "build": "babel src --out-dir lib",
-    "oldbuild": "webpack --verbose --colors --display-error-details --config webpack.prod.config.js",
+    "oldbuild": "webpack --verbose --colors --display-error-details --config webpack.example.config.js",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha -w --compilers js:babel-core/register"
   },
