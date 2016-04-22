@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import RawCalendar from './raw_calendar';
-import {CALENDAR_MODE} from './common/constant';
+import {CALENDAR_SELECT_MODE} from './common/constant';
 import * as x from './common/utils';
 import * as c from './common/calendar_utils';
 import * as rx from './common/range_calendar_utils';
@@ -65,7 +65,7 @@ const DoubleRangeCalendar = React.createClass({
             };
 
         let common_config = {
-                calendar_mode: CALENDAR_MODE.MULTIPLE,
+                select_mode: CALENDAR_SELECT_MODE.MULTIPLE,
                 show_out_range: false,
                 selected_reducer,
                 selected_range,

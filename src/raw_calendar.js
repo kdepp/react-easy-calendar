@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
-import {CALENDAR_MODE} from './common/constant';
+import {CALENDAR_SELECT_MODE} from './common/constant';
 import * as x from './common/utils';
 import * as c from './common/calendar_utils';
 import {updated_props} from './common/tool';
@@ -8,9 +8,6 @@ import {get_style, calendar_styles} from './common/style';
 
 const RawCalendar = React.createClass({
     propTypes: {
-        // calendar select mode, single or multiple
-        calendar_mode: PropTypes.number.isRequired,
-
         // key date determines current month
         key_date: PropTypes.object.isRequired,
 
@@ -28,6 +25,10 @@ const RawCalendar = React.createClass({
 
         // customize selected date state change
         selected_reducer: PropTypes.func,
+
+        // calendar select mode, single or multiple. It will use the default select reducer if you don't customize it.
+        select_mode: PropTypes.number,
+
 
         // whether to show out-of-range dates
         show_out_range: PropTypes.bool,
@@ -63,7 +64,7 @@ const RawCalendar = React.createClass({
     render: function () {
         let self = this,
             {
-                calendar_mode,
+                select_mode,
                 key_date,
                 default_date,
                 valid_range,
@@ -112,11 +113,11 @@ const RawCalendar = React.createClass({
                 'Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'
             ],
             default_selected_reducer = (prev, x) => {
-                switch (calendar_mode) {
-                    case CALENDAR_MODE.SINGLE:
+                switch (select_mode) {
+                    case CALENDAR_SELECT_MODE.SINGLE:
                         return [x];
 
-                    case CALENDAR_MODE.MULTIPLE:
+                    case CALENDAR_SELECT_MODE.MULTIPLE:
                         let index = prev.findIndex(d => c.date_equal(d, x));
                         return index == -1 ? [...prev, x] : (prev.splice(index, 1), prev);
 
