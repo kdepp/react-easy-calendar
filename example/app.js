@@ -4,22 +4,18 @@ import {render} from 'react-dom';
 import {RawCalendar, SimpleCalendar, SingleRangeCalendar, DoubleRangeCalendar, utils as c} from '../src/index';
 
 let raw_calendar_config = {
-    calendar_mode: 0,
-    show_out_range: false,
-    key_date: c.from_system_date(new Date),
-    default_date: c.from_system_date(new Date),
-    on_update_state: (state) => {
+    selectMode: 0,
+    showOutRange: false,
+    mday: c.from_system_date(new Date),
+    today: c.from_system_date(new Date),
+    onUpdateState: (state) => {
         console.log(state);
-    },
-    on_ok: (...args) => {
-        console.log(args);
-        debugger
-    },
+    }
 };
 
 let single_range_config = {
     ...raw_calendar_config,
-    show_out_range: true
+    showOutRange: true
 };
 
 render((
