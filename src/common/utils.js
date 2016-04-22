@@ -1,16 +1,16 @@
 export const partial = (fn) => {
-	let len = fn.length,
-		arbitary;
+    let len = fn.length,
+        arbitary;
 
-	arbitary = (cur_args, left_arg_cnt) => (...args) => {
-		if (args.length >= left_arg_cnt) {
-			return fn.apply(null, cur_args.concat(args));
-		}
+    arbitary = (cur_args, left_arg_cnt) => (...args) => {
+        if (args.length >= left_arg_cnt) {
+            return fn.apply(null, cur_args.concat(args));
+        }
 
-		return arbitary(cur_args.concat(args), left_arg_cnt - args.length);
-	};
+        return arbitary(cur_args.concat(args), left_arg_cnt - args.length);
+    };
 
-	return arbitary([], len);
+    return arbitary([], len);
 };
 
 export const id = (x) => x;

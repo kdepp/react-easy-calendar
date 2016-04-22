@@ -14,13 +14,13 @@ const month_tostring = (d) => c.get_year(d) + '年' + c.get_month(d) + '月';
 const date_tostring = (d) => [c.get_year(d), c.get_month(d), c.get_day(d)].join('-');
 
 const DoubleRangeCalendar = React.createClass({
-	getInitialState: function () {
-		return {
+    getInitialState: function () {
+        return {
             selected_range: [],
             selected_dates: [],
             key_date: {}
-		};
-	},
+        };
+    },
 
     componentWillReceiveProps: function (nextProps) {
         let self = this,
@@ -33,13 +33,13 @@ const DoubleRangeCalendar = React.createClass({
         this.setState(updated_props(props_to_state, self.props, nextProps));
     },
 
-	componentDidMount: function () {
-		this.setState({
-			selected_range: this.props.selected_range || [],
-			selected_dates: this.props.selected_dates || [],
-			key_date: this.props.key_date || {}
-		});
-	},
+    componentDidMount: function () {
+        this.setState({
+            selected_range: this.props.selected_range || [],
+            selected_dates: this.props.selected_dates || [],
+            key_date: this.props.key_date || {}
+        });
+    },
 
     render: function () {
         let self = this,
@@ -92,16 +92,16 @@ const DoubleRangeCalendar = React.createClass({
                 }
             },
             prev_year = () => {
-				self.setState({key_date: c.make_date(c.get_year(key_date) - 1, c.get_month(key_date) , 1)});
+                self.setState({key_date: c.make_date(c.get_year(key_date) - 1, c.get_month(key_date) , 1)});
             },
             next_year = () => {
-				self.setState({key_date: c.make_date(c.get_year(key_date) + 1, c.get_month(key_date) , 1)});
+                self.setState({key_date: c.make_date(c.get_year(key_date) + 1, c.get_month(key_date) , 1)});
             },
             prev_month = () => {
-				self.setState({key_date: c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) - 1 , 1))});
+                self.setState({key_date: c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) - 1 , 1))});
             },
             next_month = () => {
-				self.setState({key_date: c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) + 1 , 1))});
+                self.setState({key_date: c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) + 1 , 1))});
             };
 
         styles = Object.assign({}, calendar_styles, styles || {});
@@ -116,12 +116,12 @@ const DoubleRangeCalendar = React.createClass({
                         {selected_dates[1] ? date_tostring(selected_dates[1]) : ""}&nbsp;
                     </div>
                 </div>
-				<div style={styles.header}>
-					<a href='javascript: void(0)' style={styles.prev_year} onClick={prev_year}>&lt;&lt;</a>
-					<a href='javascript: void(0)' style={styles.prev_month} onClick={prev_month}>&lt;</a>
-					<a href='javascript: void(0)' style={styles.next_year} onClick={next_year}>&gt;&gt;</a>
-					<a href='javascript: void(0)' style={styles.next_month} onClick={next_month}>&gt;</a>
-					<div style={styles.month_title}>
+                <div style={styles.header}>
+                    <a href='javascript: void(0)' style={styles.prev_year} onClick={prev_year}>&lt;&lt;</a>
+                    <a href='javascript: void(0)' style={styles.prev_month} onClick={prev_month}>&lt;</a>
+                    <a href='javascript: void(0)' style={styles.next_year} onClick={next_year}>&gt;&gt;</a>
+                    <a href='javascript: void(0)' style={styles.next_month} onClick={next_month}>&gt;</a>
+                    <div style={styles.month_title}>
                         <div style={{float: 'left', marginLeft: '70px'}}>
                             {month_tostring(key_date)}
                         </div>
@@ -129,7 +129,7 @@ const DoubleRangeCalendar = React.createClass({
                             {month_tostring(next_key_date)}
                         </div>
                     </div>
-				</div>
+                </div>
                 <div style={{ overflow: 'hidden', paddingBottom: '10px' }}>
                     <RawCalendar {...first_config}  />
                     <RawCalendar {...second_config} />

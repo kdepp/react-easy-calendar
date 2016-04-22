@@ -9,11 +9,11 @@ import * as rx from './common/range_calendar_utils';
 
 
 const SingleRangeCalendar = React.createClass({
-	getInitialState: function () {
-		return {
+    getInitialState: function () {
+        return {
             selected_range: []
-		};
-	},
+        };
+    },
 
     componentWillReceiveProps: function (nextProps) {
         let self = this,
@@ -24,11 +24,11 @@ const SingleRangeCalendar = React.createClass({
         this.setState(updated_props(props_to_state, self.props, nextProps));
     },
 
-	componentDidMount: function () {
-		this.setState({
-			selected_range: this.props.selected_range || []
-		});
-	},
+    componentDidMount: function () {
+        this.setState({
+            selected_range: this.props.selected_range || []
+        });
+    },
 
     render: function () {
         let self = this,
