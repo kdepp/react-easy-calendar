@@ -4,7 +4,7 @@ import SimpleCalendar from './simple_calendar';
 import * as x from './common/utils';
 import * as c from './common/calendar_utils';
 import {updated_props} from './common/tool';
-import {get_style, calendar_styles} from './common/style';
+import {get_style, calendar_styles} from './style/bootstrap';
 import * as rx from './common/range_calendar_utils';
 
 

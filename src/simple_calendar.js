@@ -4,7 +4,7 @@ import RawCalendar from './raw_calendar';
 import * as x from './common/utils';
 import * as c from './common/calendar_utils';
 import {updated_props} from './common/tool';
-import {get_style, calendar_styles} from './common/style';
+import {get_style, calendar_styles} from './style/bootstrap';
 
 const month_tostring = (d) => c.get_year(d) + '年' + c.get_month(d) + '月';
 

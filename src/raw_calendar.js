@@ -4,7 +4,7 @@ import {CALENDAR_SELECT_MODE} from './common/constant';
 import * as x from './common/utils';
 import * as c from './common/calendar_utils';
 import {updated_props} from './common/tool';
-import {get_style, calendar_styles} from './common/style';
+import {get_style, calendar_styles} from './style/bootstrap';
 
 const RawCalendar = React.createClass({
     propTypes: {
@@ -154,7 +154,7 @@ const RawCalendar = React.createClass({
                         <ul style={styles.week}>
                         {weekday_title.map(t => {
                             return (
-                                <li key={t} style={get_style(styles, ['day', 'weekday_title'])}>{t}</li>
+                                <li key={t} style={get_style(styles, ['day', 'weekday_title'])} >{t}</li>
                             );
                         })}
                         </ul>

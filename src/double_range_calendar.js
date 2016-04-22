@@ -6,7 +6,7 @@ import * as x from './common/utils';
 import * as c from './common/calendar_utils';
 import * as rx from './common/range_calendar_utils';
 import {updated_props} from './common/tool';
-import {get_style, calendar_styles} from './common/style';
+import {get_style, calendar_styles} from './style/bootstrap';
 
 
 const month_tostring = (d) => c.get_year(d) + '年' + c.get_month(d) + '月';
@@ -107,7 +107,7 @@ const DoubleRangeCalendar = React.createClass({
         styles = Object.assign({}, calendar_styles, styles || {});
 
         return (
-            <div style={{ width: '625px' }}>
+            <div style={styles.double_range}>
                 <div style={styles.status}>
                     <div style={{float: 'left'}}>
                         {selected_dates[0] ? date_tostring(selected_dates[0]) : ""}&nbsp;
