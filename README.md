@@ -26,14 +26,14 @@ npm install --save react-easy-calendar
 ### Usage
 
 ``` js
-import {SimpleCalendar} from 'react-easy-calendar';
+import {SimpleCalendar, utils} from 'react-easy-calendar';
 
 var app = React.createClass({
     render: function () {
         return (
             <SimpleCalendar
-                mday  = {make_date(2016, 4, 1)}
-                today = {make_date(2016, 4, 21)}
+                mday  = {utils.make_date(2016, 4, 1)}
+                today = {utils.make_date(2016, 4, 21)}
                 selectMode   = {1}
                 showOutRange = {true}
             />
