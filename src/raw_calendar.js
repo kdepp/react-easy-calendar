@@ -9,13 +9,13 @@ import {get_style, calendar_styles} from './common/style';
 const RawCalendar = React.createClass({
     propTypes: {
         // key date determines current month
-        mday: PropTypes.object.isRequired,
+        mday: PropTypes.object,
 
         // today
-        today: PropTypes.object.isRequired,
+        today: PropTypes.object,
 
         // callback for state changes after mouse hover & mouse leave & click on dates
-        onUpdateState: PropTypes.func.isRequired,
+        onUpdateState: PropTypes.func,
 
         // a tuple of dates, selection can only be made in the valid range
         validRange: PropTypes.array,
