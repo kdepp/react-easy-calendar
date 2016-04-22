@@ -9,10 +9,10 @@ import {get_style, calendar_styles} from './common/style';
 const RawCalendar = React.createClass({
     propTypes: {
         // key date determines current month
-        key_date: PropTypes.object.isRequired,
+        mday: PropTypes.object.isRequired,
 
         // today
-        default_date: PropTypes.object.isRequired,
+        today: PropTypes.object.isRequired,
 
         // a tuple of dates, selection can only be made in the valid range
         valid_range: PropTypes.array,
@@ -65,8 +65,8 @@ const RawCalendar = React.createClass({
         let self = this,
             {
                 select_mode,
-                key_date,
-                default_date,
+                mday,
+                today,
                 valid_range,
                 selected_range,
                 on_update_state,
@@ -79,7 +79,7 @@ const RawCalendar = React.createClass({
                 selected_dates,
                 hovered_date
             } = self.state,
-            _default_date = default_date || c.from_system_date(new Date),
+            _today = today || c.from_system_date(new Date),
             mark_selected = x.map(d => {
                 let found = selected_dates.find(x => c.date_equal(d, x));
                 return (show_out_range || !d.out) && found ? {...d, selected: true} : d;
@@ -88,7 +88,7 @@ const RawCalendar = React.createClass({
                 return c.compare_date(hovered_date, d) === 0 ? {...d, hovered: true} : d;
             }),
             mark_defaulted = x.map(d => {
-                return (show_out_range || !d.out) && c.date_equal(_default_date, d) ? {...d, defaulted: true} : d;
+                return (show_out_range || !d.out) && c.date_equal(_today, d) ? {...d, defaulted: true} : d;
             }),
             mark_banned = x.map(d => {
                 return c.date_in_range(d, valid_range) ? d : {...d, banned: true};
@@ -97,7 +97,7 @@ const RawCalendar = React.createClass({
                 return (selected_range || []).length !== 0 && (show_out_range || !d.out) && c.date_in_range(d, selected_range) ? {...d, ranged: true} : d;
             }),
             mark_not_this_month = x.map(d => {
-                return c.get_month(d) !== c.get_month(key_date) ? {...d, out: true} : d;
+                return c.get_month(d) !== c.get_month(mday) ? {...d, out: true} : d;
             }),
             weeks = x.compose(
                 x.group(7),
@@ -108,7 +108,7 @@ const RawCalendar = React.createClass({
                 mark_banned,
                 mark_not_this_month,
                 c.padding_month_dates
-            )(key_date),
+            )(mday),
             weekday_title = [
                 'Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'
             ],
@@ -172,7 +172,7 @@ const RawCalendar = React.createClass({
                                     d.ranged    ? 'ranged_day' : '',
                                     d.selected  ? 'selected_day' : '',
                                     d.banned    ? 'banned_day' : '',
-                                    ['lt_month_day', '', 'gt_month_day'][1 + c.compare_month(d, key_date)]
+                                    ['lt_month_day', '', 'gt_month_day'][1 + c.compare_month(d, mday)]
                                 ];
 
                                 return (

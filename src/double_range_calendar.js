@@ -18,7 +18,7 @@ const DoubleRangeCalendar = React.createClass({
         return {
             selected_range: [],
             selected_dates: [],
-            key_date: {}
+            mday: {}
         };
     },
 
@@ -27,7 +27,7 @@ const DoubleRangeCalendar = React.createClass({
             props_to_state = {
                 selected_range: (a, b) => c.compare_date(a[0], b[0]) === 0 && c.compare_date(a[1], b[1]) === 0,
                 selected_dates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
-                key_date: (a, b) => c.compare_date(a, b) === 0
+                mday: (a, b) => c.compare_date(a, b) === 0
             };
 
         this.setState(updated_props(props_to_state, self.props, nextProps));
@@ -37,7 +37,7 @@ const DoubleRangeCalendar = React.createClass({
         this.setState({
             selected_range: this.props.selected_range || [],
             selected_dates: this.props.selected_dates || [],
-            key_date: this.props.key_date || {}
+            mday: this.props.mday || {}
         });
     },
 
@@ -46,15 +46,15 @@ const DoubleRangeCalendar = React.createClass({
             {
                 on_update,
                 valid_range,
-                default_date,
+                today,
                 styles
             } = self.props,
             {
                 selected_range,
                 selected_dates,
-                key_date
+                mday
             } = self.state,
-            next_key_date    = c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) + 1 , 1)),
+            next_mday    = c.normalize_month(c.make_date(c.get_year(mday), c.get_month(mday) + 1 , 1)),
             selected_reducer = rx.range_calendar_selected_reducer,
             on_update_state  = (state) => {
                 let selected_range = rx.range_calendar_selected_range(state);   
@@ -72,12 +72,12 @@ const DoubleRangeCalendar = React.createClass({
                 selected_dates,
                 on_update_state,
                 valid_range,
-                default_date
+                today
             },
             first_config = {
                 ...common_config,
                 selected_dates,
-                key_date,
+                mday,
                 style: {
                     float: 'left'
                 }
@@ -85,23 +85,23 @@ const DoubleRangeCalendar = React.createClass({
             second_config = {
                 ...common_config,
                 selected_dates,
-                key_date:  next_key_date,
+                mday:  next_mday,
                 style: {
                     float: 'left',
                     marginLeft: '20px'
                 }
             },
             prev_year = () => {
-                self.setState({key_date: c.make_date(c.get_year(key_date) - 1, c.get_month(key_date) , 1)});
+                self.setState({mday: c.make_date(c.get_year(mday) - 1, c.get_month(mday) , 1)});
             },
             next_year = () => {
-                self.setState({key_date: c.make_date(c.get_year(key_date) + 1, c.get_month(key_date) , 1)});
+                self.setState({mday: c.make_date(c.get_year(mday) + 1, c.get_month(mday) , 1)});
             },
             prev_month = () => {
-                self.setState({key_date: c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) - 1 , 1))});
+                self.setState({mday: c.normalize_month(c.make_date(c.get_year(mday), c.get_month(mday) - 1 , 1))});
             },
             next_month = () => {
-                self.setState({key_date: c.normalize_month(c.make_date(c.get_year(key_date), c.get_month(key_date) + 1 , 1))});
+                self.setState({mday: c.normalize_month(c.make_date(c.get_year(mday), c.get_month(mday) + 1 , 1))});
             };
 
         styles = Object.assign({}, calendar_styles, styles || {});
@@ -123,10 +123,10 @@ const DoubleRangeCalendar = React.createClass({
                     <a href='javascript: void(0)' style={styles.next_month} onClick={next_month}>&gt;</a>
                     <div style={styles.month_title}>
                         <div style={{float: 'left', marginLeft: '70px'}}>
-                            {month_tostring(key_date)}
+                            {month_tostring(mday)}
                         </div>
                         <div style={{float: 'right', marginRight: '70px'}}>
-                            {month_tostring(next_key_date)}
+                            {month_tostring(next_mday)}
                         </div>
                     </div>
                 </div>
