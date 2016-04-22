@@ -11,14 +11,14 @@ import * as rx from './common/range_calendar_utils';
 const SingleRangeCalendar = React.createClass({
     getInitialState: function () {
         return {
-            selected_range: []
+            selectedRange: []
         };
     },
 
     componentWillReceiveProps: function (nextProps) {
         let self = this,
             props_to_state = {
-                selected_range: (a, b) => c.compare_date(a[0], b[0]) === 0 && c.compare_date(a[1], b[1]) === 0
+                selectedRange: (a, b) => c.compare_date(a[0], b[0]) === 0 && c.compare_date(a[1], b[1]) === 0
             };
 
         this.setState(updated_props(props_to_state, self.props, nextProps));
@@ -26,27 +26,27 @@ const SingleRangeCalendar = React.createClass({
 
     componentDidMount: function () {
         this.setState({
-            selected_range: this.props.selected_range || []
+            selectedRange: this.props.selectedRange || []
         });
     },
 
     render: function () {
         let self = this,
             props = self.props,
-            {selected_range} = self.state,
-            on_update_state  = (state) => {
-                let selected_range = rx.range_calendar_selected_range(state);   
+            {selectedRange} = self.state,
+            onUpdateState  = (state) => {
+                let selectedRange = rx.range_calendar_selected_range(state);   
 
-                self.setState({ ...state, selected_range }, () => {
-                    (props.on_update_state || x.noop)(self.state);
+                self.setState({ ...state, selectedRange }, () => {
+                    (props.onUpdateState || x.noop)(self.state);
                 });
             },
-            selected_reducer = rx.range_calendar_selected_reducer,
+            selectedReducer = rx.range_calendar_selected_reducer,
             config = {
                 ...props,
-                selected_range,
-                selected_reducer,
-                on_update_state
+                selectedRange,
+                selectedReducer,
+                onUpdateState
             };
 
         return (

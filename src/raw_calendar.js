@@ -14,24 +14,23 @@ const RawCalendar = React.createClass({
         // today
         today: PropTypes.object.isRequired,
 
+        // callback for state changes after mouse hover & mouse leave & click on dates
+        onUpdateState: PropTypes.func.isRequired,
+
         // a tuple of dates, selection can only be made in the valid range
-        valid_range: PropTypes.array,
+        validRange: PropTypes.array,
 
         // a tuple of selected dates
-        selected_range: PropTypes.array,
-
-        // callback for state changes after mouse hover & mouse leave & click on dates
-        on_update_state: PropTypes.func.isRequired,
+        selectedRange: PropTypes.array,
 
         // customize selected date state change
-        selected_reducer: PropTypes.func,
+        selectedReducer: PropTypes.func,
 
         // calendar select mode, single or multiple. It will use the default select reducer if you don't customize it.
-        select_mode: PropTypes.number,
-
+        selectMode: PropTypes.number,
 
         // whether to show out-of-range dates
-        show_out_range: PropTypes.bool,
+        showOutRange: PropTypes.bool,
 
         // customize styles
         styles: PropTypes.object
@@ -64,14 +63,14 @@ const RawCalendar = React.createClass({
     render: function () {
         let self = this,
             {
-                select_mode,
+                selectMode,
                 mday,
                 today,
-                valid_range,
-                selected_range,
-                on_update_state,
-                selected_reducer,
-                show_out_range,
+                validRange,
+                selectedRange,
+                onUpdateState,
+                selectedReducer,
+                showOutRange,
                 styles,
                 style
             } = self.props,
@@ -82,19 +81,19 @@ const RawCalendar = React.createClass({
             _today = today || c.from_system_date(new Date),
             mark_selected = x.map(d => {
                 let found = selected_dates.find(x => c.date_equal(d, x));
-                return (show_out_range || !d.out) && found ? {...d, selected: true} : d;
+                return (showOutRange || !d.out) && found ? {...d, selected: true} : d;
             }),
             mark_hovered = x.map(d => {
                 return c.compare_date(hovered_date, d) === 0 ? {...d, hovered: true} : d;
             }),
             mark_defaulted = x.map(d => {
-                return (show_out_range || !d.out) && c.date_equal(_today, d) ? {...d, defaulted: true} : d;
+                return (showOutRange || !d.out) && c.date_equal(_today, d) ? {...d, defaulted: true} : d;
             }),
             mark_banned = x.map(d => {
-                return c.date_in_range(d, valid_range) ? d : {...d, banned: true};
+                return c.date_in_range(d, validRange) ? d : {...d, banned: true};
             }),
             mark_range = x.map(d => {
-                return (selected_range || []).length !== 0 && (show_out_range || !d.out) && c.date_in_range(d, selected_range) ? {...d, ranged: true} : d;
+                return (selectedRange || []).length !== 0 && (showOutRange || !d.out) && c.date_in_range(d, selectedRange) ? {...d, ranged: true} : d;
             }),
             mark_not_this_month = x.map(d => {
                 return c.get_month(d) !== c.get_month(mday) ? {...d, out: true} : d;
@@ -113,7 +112,7 @@ const RawCalendar = React.createClass({
                 'Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'
             ],
             default_selected_reducer = (prev, x) => {
-                switch (select_mode) {
+                switch (selectMode) {
                     case CALENDAR_SELECT_MODE.SINGLE:
                         return [x];
 
@@ -126,13 +125,13 @@ const RawCalendar = React.createClass({
                 }
             },
             notify_state_change = () => {
-                (on_update_state || noop)(self.state);
+                (onUpdateState || noop)(self.state);
             },
             on_click_date = (date) => () => {
                 if (date.banned)    return;
 
                 self.setState({
-                    selected_dates: (selected_reducer || default_selected_reducer)(self.state.selected_dates, date)
+                    selected_dates: (selectedReducer || default_selected_reducer)(self.state.selected_dates, date)
                 }, notify_state_change);
             },
             on_hover_date = (date) => () => {

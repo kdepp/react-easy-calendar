@@ -16,7 +16,7 @@ const date_tostring = (d) => [c.get_year(d), c.get_month(d), c.get_day(d)].join(
 const DoubleRangeCalendar = React.createClass({
     getInitialState: function () {
         return {
-            selected_range: [],
+            selectedRange: [],
             selected_dates: [],
             mday: {}
         };
@@ -25,7 +25,7 @@ const DoubleRangeCalendar = React.createClass({
     componentWillReceiveProps: function (nextProps) {
         let self = this,
             props_to_state = {
-                selected_range: (a, b) => c.compare_date(a[0], b[0]) === 0 && c.compare_date(a[1], b[1]) === 0,
+                selectedRange: (a, b) => c.compare_date(a[0], b[0]) === 0 && c.compare_date(a[1], b[1]) === 0,
                 selected_dates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
                 mday: (a, b) => c.compare_date(a, b) === 0
             };
@@ -35,7 +35,7 @@ const DoubleRangeCalendar = React.createClass({
 
     componentDidMount: function () {
         this.setState({
-            selected_range: this.props.selected_range || [],
+            selectedRange: this.props.selectedRange || [],
             selected_dates: this.props.selected_dates || [],
             mday: this.props.mday || {}
         });
@@ -45,33 +45,33 @@ const DoubleRangeCalendar = React.createClass({
         let self = this,
             {
                 on_update,
-                valid_range,
+                validRange,
                 today,
                 styles
             } = self.props,
             {
-                selected_range,
+                selectedRange,
                 selected_dates,
                 mday
             } = self.state,
             next_mday    = c.normalize_month(c.make_date(c.get_year(mday), c.get_month(mday) + 1 , 1)),
-            selected_reducer = rx.range_calendar_selected_reducer,
-            on_update_state  = (state) => {
-                let selected_range = rx.range_calendar_selected_range(state);   
+            selectedReducer = rx.range_calendar_selected_reducer,
+            onUpdateState  = (state) => {
+                let selectedRange = rx.range_calendar_selected_range(state);   
 
-                self.setState({ ...state, selected_range }, () => {
-                    (self.props.on_update_state || x.noop)(self.state);
+                self.setState({ ...state, selectedRange }, () => {
+                    (self.props.onUpdateState || x.noop)(self.state);
                 });
             };
 
         let common_config = {
-                select_mode: CALENDAR_SELECT_MODE.MULTIPLE,
-                show_out_range: false,
-                selected_reducer,
-                selected_range,
+                selectMode: CALENDAR_SELECT_MODE.MULTIPLE,
+                showOutRange: false,
+                selectedReducer,
+                selectedRange,
                 selected_dates,
-                on_update_state,
-                valid_range,
+                onUpdateState,
+                validRange,
                 today
             },
             first_config = {
