@@ -37,7 +37,7 @@ const DoubleRangeCalendar = React.createClass({
         this.setState({
             selectedRange: this.props.selectedRange || [],
             selected_dates: this.props.selected_dates || [],
-            mday: this.props.mday || {}
+            mday: this.props.mday || c.from_system_date(new Date)
         });
     },
 

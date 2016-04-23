@@ -26,7 +26,7 @@ const SimpleCalendar = React.createClass({
 
     componentDidMount: function () {
         this.setState({
-            mday: this.props.mday || {}
+            mday: this.props.mday || c.from_system_date(new Date)
         });
     },
 

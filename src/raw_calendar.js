@@ -64,8 +64,8 @@ const RawCalendar = React.createClass({
         let self = this,
             {
                 selectMode,
-                mday,
-                today,
+                mday  = c.from_system_date(new Date),
+                today = c.from_system_date(new Date),
                 validRange,
                 selectedRange,
                 onUpdateState,
@@ -78,7 +78,6 @@ const RawCalendar = React.createClass({
                 selected_dates,
                 hovered_date
             } = self.state,
-            _today = today || c.from_system_date(new Date),
             mark_selected = x.map(d => {
                 let found = selected_dates.find(x => c.date_equal(d, x));
                 return (showOutRange || !d.out) && found ? {...d, selected: true} : d;
@@ -87,7 +86,7 @@ const RawCalendar = React.createClass({
                 return c.compare_date(hovered_date, d) === 0 ? {...d, hovered: true} : d;
             }),
             mark_defaulted = x.map(d => {
-                return (showOutRange || !d.out) && c.date_equal(_today, d) ? {...d, defaulted: true} : d;
+                return (showOutRange || !d.out) && c.date_equal(today, d) ? {...d, defaulted: true} : d;
             }),
             mark_banned = x.map(d => {
                 return c.date_in_range(d, validRange) ? d : {...d, banned: true};
