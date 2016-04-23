@@ -15,13 +15,16 @@ npm install --save react-easy-calendar
 ### Screenshots
 
 **Simple Calendar**   
-![simple calendar](https://cloud.githubusercontent.com/assets/461599/14698415/19c78fc0-07c1-11e6-9f17-6c7eb27708c7.png)
+![simple calendar](https://cloud.githubusercontent.com/assets/461599/14759773/07114b90-0961-11e6-960a-91e43b6a4ce4.png)
+
+**Multi-Select Calendar**   
+![simple calendar](https://cloud.githubusercontent.com/assets/461599/14759775/0711c9d0-0961-11e6-885c-bb5309876f4d.png)
 
 **Single Range Calendar**   
-![single range calendar](https://cloud.githubusercontent.com/assets/461599/14698414/199d41e8-07c1-11e6-9058-8bf79a049179.png)
+![single range calendar](https://cloud.githubusercontent.com/assets/461599/14759774/07114a8c-0961-11e6-9b97-cc2d57b2a65f.png)
 
 **Double Range Calendar**   
-![double range calendar](https://cloud.githubusercontent.com/assets/461599/14698413/199c5eb8-07c1-11e6-80e8-6d3b3fffee8a.png)
+![double range calendar](https://cloud.githubusercontent.com/assets/461599/14759772/071036d8-0961-11e6-9d4a-0920471635ce.png)
 
 ### Usage
 
