@@ -4598,6 +4598,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var selectedDates = _ref.selectedDates;
 	    var hoveredDate = _ref.hoveredDate;
 
+	    if (!selectedDates) return [];
+
 	    switch (selectedDates.length) {
 	        case 2:
 	            return selectedDates;

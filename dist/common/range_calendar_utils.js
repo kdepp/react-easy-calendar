@@ -13,6 +13,8 @@ var range_calendar_selected_range = exports.range_calendar_selected_range = func
     var selectedDates = _ref.selectedDates;
     var hoveredDate = _ref.hoveredDate;
 
+    if (!selectedDates) return [];
+
     switch (selectedDates.length) {
         case 2:
             return selectedDates;
