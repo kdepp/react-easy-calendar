@@ -12,6 +12,10 @@ npm install --save react-easy-calendar
 
 [http://kdepp.github.io/react-easy-calendar/demo.html](http://kdepp.github.io/react-easy-calendar/demo.html)
 
+### Playground
+
+[https://jsfiddle.net/kdepp/3uqudotn/](https://jsfiddle.net/kdepp/3uqudotn/)
+
 ### Screenshots
 
 **Simple Calendar**   
