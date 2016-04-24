@@ -17,7 +17,7 @@ const DoubleRangeCalendar = React.createClass({
     getInitialState: function () {
         return {
             selectedRange: [],
-            selected_dates: [],
+            selectedDates: [],
             mday: {}
         };
     },
@@ -26,7 +26,7 @@ const DoubleRangeCalendar = React.createClass({
         let self = this,
             props_to_state = {
                 selectedRange: (a, b) => c.compare_date(a[0], b[0]) === 0 && c.compare_date(a[1], b[1]) === 0,
-                selected_dates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
+                selectedDates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
                 mday: (a, b) => c.compare_date(a, b) === 0
             };
 
@@ -36,7 +36,7 @@ const DoubleRangeCalendar = React.createClass({
     componentDidMount: function () {
         this.setState({
             selectedRange: this.props.selectedRange || [],
-            selected_dates: this.props.selected_dates || [],
+            selectedDates: this.props.selectedDates || [],
             mday: this.props.mday || c.from_system_date(new Date)
         });
     },
@@ -51,15 +51,15 @@ const DoubleRangeCalendar = React.createClass({
             } = self.props,
             {
                 selectedRange,
-                selected_dates,
+                selectedDates,
                 mday
             } = self.state,
             next_mday    = c.normalize_month(c.make_date(c.get_year(mday), c.get_month(mday) + 1 , 1)),
             selectedReducer = rx.range_calendar_selected_reducer,
             onUpdateState  = (state) => {
                 let selectedRange = rx.range_calendar_selected_range(state),
-                    old_selected = self.state.selected_dates,
-                    new_selected = state.selected_dates;
+                    old_selected = self.state.selectedDates,
+                    new_selected = state.selectedDates;
 
                 self.setState({ ...state, selectedRange }, () => {
                     (self.props.onUpdateState || x.noop)(self.state);
@@ -75,7 +75,7 @@ const DoubleRangeCalendar = React.createClass({
                 showOutRange: false,
                 selectedReducer,
                 selectedRange,
-                selected_dates,
+                selectedDates,
                 onUpdateState,
                 validRange,
                 today
@@ -114,10 +114,10 @@ const DoubleRangeCalendar = React.createClass({
             <div style={styles.double_range}>
                 <div style={styles.status}>
                     <div style={{float: 'left'}}>
-                        {selected_dates[0] ? date_tostring(selected_dates[0]) : ""}&nbsp;
+                        {selectedDates[0] ? date_tostring(selectedDates[0]) : ""}&nbsp;
                     </div>
                     <div style={{float: 'right'}}>
-                        {selected_dates[1] ? date_tostring(selected_dates[1]) : ""}&nbsp;
+                        {selectedDates[1] ? date_tostring(selectedDates[1]) : ""}&nbsp;
                     </div>
                 </div>
                 <div style={styles.header}>

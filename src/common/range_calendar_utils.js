@@ -1,12 +1,12 @@
 import {compare_date, offset_date} from './calendar_utils';
 
-export const range_calendar_selected_range = ({selected_dates, hovered_date}) => {
-    switch (selected_dates.length) {
+export const range_calendar_selected_range = ({selectedDates, hoveredDate}) => {
+    switch (selectedDates.length) {
         case 2:
-            return selected_dates;
+            return selectedDates;
 
         case 1:
-            return compare_date(hovered_date, selected_dates[0]) == 1 ? [...selected_dates, offset_date(hovered_date, -1)] : [];
+            return compare_date(hoveredDate, selectedDates[0]) == 1 ? [...selectedDates, offset_date(hoveredDate, -1)] : [];
 
         default:
             return [];

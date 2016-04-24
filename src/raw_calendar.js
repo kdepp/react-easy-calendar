@@ -41,16 +41,16 @@ const RawCalendar = React.createClass({
 
     getInitialState: function () {
         return {
-            selected_dates: [],
-            hovered_date: {}
+            selectedDates: [],
+            hoveredDate: {}
         };
     },
 
     componentWillReceiveProps: function (nextProps) {
         let self = this,
             props_to_state = {
-                selected_dates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
-                hovered_date: (a, b) => c.compare_date(a, b) === 0
+                selectedDates: (a, b) => x.and.apply(null, x.zipWith((x, y) => c.compare_date(x, y) === 0, a || [], b || [])),
+                hoveredDate: (a, b) => c.compare_date(a, b) === 0
             };
 
         this.setState(updated_props(props_to_state, self.props, nextProps));
@@ -58,8 +58,8 @@ const RawCalendar = React.createClass({
 
     componentDidMount: function () {
         this.setState({
-            selected_dates: this.props.selected_dates || [],
-            hovered_date: this.props.hovered_date || {}
+            selectedDates: this.props.selectedDates || [],
+            hoveredDate: this.props.hoveredDate || {}
         });
     },
 
@@ -92,15 +92,15 @@ const RawCalendar = React.createClass({
                 style
             } = self.props,
             {
-                selected_dates,
-                hovered_date
+                selectedDates,
+                hoveredDate
             } = self.state,
             mark_selected = x.map(d => {
-                let found = selected_dates.find(x => c.date_equal(d, x));
+                let found = selectedDates.find(x => c.date_equal(d, x));
                 return (showOutRange || !d.out) && found ? {...d, selected: true} : d;
             }),
             mark_hovered = x.map(d => {
-                return c.compare_date(hovered_date, d) === 0 ? {...d, hovered: true} : d;
+                return c.compare_date(hoveredDate, d) === 0 ? {...d, hovered: true} : d;
             }),
             mark_defaulted = x.map(d => {
                 return (showOutRange || !d.out) && c.date_equal(today, d) ? {...d, defaulted: true} : d;
@@ -133,11 +133,11 @@ const RawCalendar = React.createClass({
             on_click_date = (date) => () => {
                 if (date.banned)    return;
 
-                let old_selected = self.state.selected_dates,
+                let old_selected = self.state.selectedDates,
                     new_selected = (selectedReducer || default_selected_reducer)(old_selected, date);
 
                 self.setState({
-                    selected_dates: new_selected
+                    selectedDates: new_selected
                 }, () => {
                     notify_state_change();
 
@@ -148,12 +148,12 @@ const RawCalendar = React.createClass({
             },
             on_hover_date = (date) => () => {
                 self.setState({
-                    hovered_date: date
+                    hoveredDate: date
                 }, notify_state_change);
             },
             on_leave_date = (date) => () => {
-                if (c.compare_date(date, self.state.hovered_date) === 0) {
-                    self.setState({hovered_date: {}}, notify_state_change);
+                if (c.compare_date(date, self.state.hoveredDate) === 0) {
+                    self.setState({hoveredDate: {}}, notify_state_change);
                 }
             };
 
