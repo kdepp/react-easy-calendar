@@ -1,6 +1,6 @@
 import * as x from './utils';
 
-const {partial, compose, range, flatten} = x;
+const {partial, compose, range, flatten, and, map, zipWith} = x;
 
 export const make_date         = (year, month, day) => ({day, month, year});
 export const get_day           = (d) => d.day;
@@ -11,8 +11,10 @@ export const system_date       = (d) => new Date(get_year(d), get_month(d) - 1, 
 export const from_system_date  = (d) => make_date(d.getFullYear(), d.getMonth() + 1, d.getDate());
 
 export const compare = partial((level, a, b) => {
-    if (!a || !b)
-        return null;
+    if (!a || !b) {
+        if (!a && !b)   return true;
+        return false;
+    }
 
     let helper = (x, y) => Math.sign(x - y),
         levels = { year: 1, month: 2, day: 3 },
@@ -27,6 +29,10 @@ export const compare_date      = compare('day');
 export const compare_month     = compare('month');
 export const compare_year      = compare('year');
 export const date_equal        = (a, b) => !compare_date(a, b);
+export const date_list_equal   = (list1, list2) => (
+    list1.length === list2.length
+    && and.apply(null, map(([a, b]) => date_equal(a, b), zipWith((a, b) => [a, b], list1, list2)))      
+);
 
 export const date_in_range = (d, r) => {
    let [start, end] = (r || []);
