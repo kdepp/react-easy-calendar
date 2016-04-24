@@ -26,7 +26,7 @@ const RawCalendar = React.createClass({
         // a list of selected dates
         selectedDates: PropTypes.array,
 
-        // a tuple of dates to show range
+        // internal use only, a tuple of dates to show range
         selectedRange: PropTypes.array,
 
         // customize selected date state change

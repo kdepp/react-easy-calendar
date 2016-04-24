@@ -28,7 +28,10 @@ npm install --save react-easy-calendar
 
 ### Usage
 
+
 ``` js
+// a normal calendar
+
 import {SimpleCalendar, utils} from 'react-easy-calendar';
 
 var app = React.createClass({
@@ -37,6 +40,26 @@ var app = React.createClass({
             <SimpleCalendar
                 mday  = {utils.make_date(2016, 4, 1)}
                 today = {utils.make_date(2016, 4, 21)}
+                selectedDates = {[utils.make_date(2016, 4, 13)]}
+                selectMode   = {0}
+            />
+        );
+    }
+});
+```
+
+``` js
+// A multi-select calendar
+
+import {SimpleCalendar, utils} from 'react-easy-calendar';
+
+var app = React.createClass({
+    render: function () {
+        return (
+            <SimpleCalendar
+                mday  = {utils.make_date(2016, 4, 1)}
+                today = {utils.make_date(2016, 4, 21)}
+                selectedDates = {[utils.make_date(2016, 4, 1), utils.make_date(2016, 4, 13)]}
                 selectMode   = {1}
                 showOutRange = {true}
             />
@@ -46,6 +69,9 @@ var app = React.createClass({
 ```
 
 ### Component Props
+
+- **onChange** (optional)
+    - callback for change of selected dates
 
 - **onUpdateState** (optional)
     - callback for state changes after mouse hover & mouse leave & click on dates
@@ -61,8 +87,8 @@ var app = React.createClass({
 - **validRange** (optional)
     - a tuple of dates, selection can only be made in the valid range
 
-- **selectedRange** (optional)
-    - a tuple of selected dates
+- **selectedDates** (optional)
+    - a list of selected dates
 
 - **selectedReducer** (optional)
     - customize selected date state change reducer
