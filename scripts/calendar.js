@@ -97,7 +97,7 @@
 
 	var code_3 = 'import React, {Component} from \'react\';\nimport {render} from \'react-dom\';\nimport {SingleRangeCalendar, utils} from \'react-easy-calendar\';\n\nrender((\n    <SingleRangeCalendar\n        selectedDates = {[utils.make_date(2016, 4, 1), utils.make_date(2016, 4, 13)]}\n        showOutRange = {true}\n        onChange = {(new_list, old_list) => console.log(\'onChange\', new_list, old_list)}\n    />\n), document.getElementById(\'container\'));\n';
 
-	var code_4 = 'import React, {Component} from \'react\';\nimport {render} from \'react-dom\';\nimport {SimpleCalendar, utils} from \'react-easy-calendar\';\n\nrender((\n    <DoubleRangeCalendar\n        selectedDates = {[utils.make_date(2016, 4, 10), utils.make_date(2016, 5, 13)]}\n        onChange = {(new_list, old_list) => console.log(\'onChange\', new_list, old_list)}\n    />\n), document.getElementById(\'container\'));\n';
+	var code_4 = 'import React, {Component} from \'react\';\nimport {render} from \'react-dom\';\nimport {DoubleRangeCalendar, utils} from \'react-easy-calendar\';\n\nrender((\n    <DoubleRangeCalendar\n        selectedDates = {[utils.make_date(2016, 4, 10), utils.make_date(2016, 5, 13)]}\n        onChange = {(new_list, old_list) => console.log(\'onChange\', new_list, old_list)}\n    />\n), document.getElementById(\'container\'));\n';
 
 	var onChange = function onChange(n, o) {
 	    console.log('changing', n, o);
