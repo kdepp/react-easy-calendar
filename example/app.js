@@ -74,7 +74,7 @@ render((
 let code_4 =
 `import React, {Component} from 'react';
 import {render} from 'react-dom';
-import {SimpleCalendar, utils} from 'react-easy-calendar';
+import {DoubleRangeCalendar, utils} from 'react-easy-calendar';
 
 render((
     <DoubleRangeCalendar
