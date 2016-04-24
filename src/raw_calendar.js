@@ -17,6 +17,9 @@ const RawCalendar = React.createClass({
         // callback for state changes after mouse hover & mouse leave & click on dates
         onUpdateState: PropTypes.func,
 
+        // callback for the change of selected date 
+        onChange: PropTypes.func,
+
         // a tuple of dates, selection can only be made in the valid range
         validRange: PropTypes.array,
 
@@ -61,16 +64,30 @@ const RawCalendar = React.createClass({
     },
 
     render: function () {
-        let self = this,
+        let default_selected_reducer = (prev, x) => {
+                switch (selectMode) {
+                    case CALENDAR_SELECT_MODE.SINGLE:
+                        return [x];
+
+                    case CALENDAR_SELECT_MODE.MULTIPLE:
+                        let index = prev.findIndex(d => c.date_equal(d, x));
+                        return index == -1 ? [...prev, x] : (prev.splice(index, 1), prev);
+
+                    default:
+                        return prev;
+                }
+            },
+            self = this,
             {
                 selectMode,
                 mday  = c.from_system_date(new Date),
                 today = c.from_system_date(new Date),
-                validRange,
-                selectedRange,
-                onUpdateState,
-                selectedReducer,
-                showOutRange,
+                validRange = [],
+                selectedRange = [],
+                onUpdateState = x.noop,
+                onChange = x.noop,
+                selectedReducer = default_selected_reducer,
+                showOutRange = false,
                 styles,
                 style
             } = self.props,
@@ -92,7 +109,7 @@ const RawCalendar = React.createClass({
                 return c.date_in_range(d, validRange) ? d : {...d, banned: true};
             }),
             mark_range = x.map(d => {
-                return (selectedRange || []).length !== 0 && (showOutRange || !d.out) && c.date_in_range(d, selectedRange) ? {...d, ranged: true} : d;
+                return selectedRange.length !== 0 && (showOutRange || !d.out) && c.date_in_range(d, selectedRange) ? {...d, ranged: true} : d;
             }),
             mark_not_this_month = x.map(d => {
                 return c.get_month(d) !== c.get_month(mday) ? {...d, out: true} : d;
@@ -110,28 +127,24 @@ const RawCalendar = React.createClass({
             weekday_title = [
                 'Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'
             ],
-            default_selected_reducer = (prev, x) => {
-                switch (selectMode) {
-                    case CALENDAR_SELECT_MODE.SINGLE:
-                        return [x];
-
-                    case CALENDAR_SELECT_MODE.MULTIPLE:
-                        let index = prev.findIndex(d => c.date_equal(d, x));
-                        return index == -1 ? [...prev, x] : (prev.splice(index, 1), prev);
-
-                    default:
-                        return prev;
-                }
-            },
             notify_state_change = () => {
-                (onUpdateState || noop)(self.state);
+                onUpdateState(self.state);
             },
             on_click_date = (date) => () => {
                 if (date.banned)    return;
 
+                let old_selected = self.state.selected_dates,
+                    new_selected = (selectedReducer || default_selected_reducer)(old_selected, date);
+
                 self.setState({
-                    selected_dates: (selectedReducer || default_selected_reducer)(self.state.selected_dates, date)
-                }, notify_state_change);
+                    selected_dates: new_selected
+                }, () => {
+                    notify_state_change();
+
+                    if (!c.date_list_equal(old_selected, new_selected)) {
+                        onChange(new_selected, old_selected);
+                    }
+                });
             },
             on_hover_date = (date) => () => {
                 self.setState({

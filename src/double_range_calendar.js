@@ -44,7 +44,7 @@ const DoubleRangeCalendar = React.createClass({
     render: function () {
         let self = this,
             {
-                on_update,
+                onChange = x.noop,
                 validRange,
                 today,
                 styles
@@ -57,11 +57,17 @@ const DoubleRangeCalendar = React.createClass({
             next_mday    = c.normalize_month(c.make_date(c.get_year(mday), c.get_month(mday) + 1 , 1)),
             selectedReducer = rx.range_calendar_selected_reducer,
             onUpdateState  = (state) => {
-                let selectedRange = rx.range_calendar_selected_range(state);   
+                let selectedRange = rx.range_calendar_selected_range(state),
+                    old_selected = self.state.selected_dates,
+                    new_selected = state.selected_dates;
 
                 self.setState({ ...state, selectedRange }, () => {
                     (self.props.onUpdateState || x.noop)(self.state);
                 });
+
+                if (!c.date_list_equal(old_selected, new_selected)) {
+                    onChange(new_selected, old_selected);
+                }
             };
 
         let common_config = {
@@ -76,7 +82,6 @@ const DoubleRangeCalendar = React.createClass({
             },
             first_config = {
                 ...common_config,
-                selected_dates,
                 mday,
                 style: {
                     float: 'left'
@@ -84,7 +89,6 @@ const DoubleRangeCalendar = React.createClass({
             },
             second_config = {
                 ...common_config,
-                selected_dates,
                 mday:  next_mday,
                 style: {
                     float: 'left',
