@@ -1,6 +1,8 @@
 import {compare_date, offset_date} from './calendar_utils';
 
 export const range_calendar_selected_range = ({selectedDates, hoveredDate}) => {
+    if (!selectedDates) return [];
+
     switch (selectedDates.length) {
         case 2:
             return selectedDates;
