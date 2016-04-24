@@ -23,7 +23,10 @@ const RawCalendar = React.createClass({
         // a tuple of dates, selection can only be made in the valid range
         validRange: PropTypes.array,
 
-        // a tuple of selected dates
+        // a list of selected dates
+        selectedDates: PropTypes.array,
+
+        // a tuple of dates to show range
         selectedRange: PropTypes.array,
 
         // customize selected date state change

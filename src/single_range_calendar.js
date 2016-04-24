@@ -26,7 +26,9 @@ const SingleRangeCalendar = React.createClass({
 
     componentDidMount: function () {
         this.setState({
-            selectedRange: this.props.selectedRange || []
+            selectedRange: rx.range_calendar_selected_range({
+                selectedDates: this.props.selectedDates
+            })
         });
     },
 
