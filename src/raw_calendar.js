@@ -70,8 +70,10 @@ const RawCalendar = React.createClass({
                         return [x];
 
                     case CALENDAR_SELECT_MODE.MULTIPLE:
-                        let index = prev.findIndex(d => c.date_equal(d, x));
-                        return index == -1 ? [...prev, x] : (prev.splice(index, 1), prev);
+                        let index = prev.findIndex(d => c.date_equal(d, x)),
+                            copy;
+
+                        return index == -1 ? [...prev, x] : (copy = [...prev], copy.splice(index, 1), copy);
 
                     default:
                         return prev;
