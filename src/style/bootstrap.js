@@ -46,13 +46,13 @@ export const calendar_styles = {
         textAlign: 'center'
     },
     weeks: {
-        padding: 0,
+        padding: '0px',
         listStyleType: 'none'
     },
     week: {
         boxSizing: 'border-box',
         overflow: 'hidden',
-        padding: '0'
+        padding: '0px'
     },
     day: {
         float: 'left',
