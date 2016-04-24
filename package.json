@@ -7,11 +7,13 @@
     "calendar"
   ],
   "author": "kdepp <kdepp.cd@gmail.com>",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --config webpack.dev.config.js --port 8384 --content-base example/",
-    "build": "babel src --out-dir lib",
-    "oldbuild": "webpack --verbose --colors --display-error-details --config webpack.example.config.js",
+    "build": "npm run build:babel && npm run build:webpack",
+    "build:babel": "babel src --out-dir dist",
+    "build:webpack": "webpack --verbose --colors --display-error-details --config webpack.prod.config.js",
+    "build:example": "webpack --verbose --colors --display-error-details --config webpack.example.config.js",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha -w --compilers js:babel-core/register"
   },

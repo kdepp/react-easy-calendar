@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'lib'),
-        filename: 'calendar.js',
+        filename: 'example.js',
     },
     module: {
         loaders: [
